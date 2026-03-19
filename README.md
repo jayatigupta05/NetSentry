@@ -1,4 +1,4 @@
-## NetSentry — Lightweight Hybrid Intrusion Detection System
+## Lightweight Hybrid Intrusion Detection System
 
 **NetSentry** is a prototype Intrusion Detection System (IDS)
 that combines rule-based filtering with anomaly detection
