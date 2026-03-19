@@ -6,7 +6,6 @@ to detect suspicious network activity.
 
 ## 🔍 Summary
 
-NetSentry:
 - Captures network packets
 - Applies signature/rule-based detection
 - Uses K-Means clustering to flag anomalous traffic
