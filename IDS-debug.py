@@ -1,10 +1,11 @@
 from scapy.all import *
 import time
+import csv
 
 def process_packet(pkt):
     global ip_mac_map, alerted_ips, traffic_tracker, syn_tracker
     
-    # --- ARP Spoofing Logic (No changes needed here) ---
+    # --- ARP Spoofing Logic ---
     if pkt.haslayer(ARP):
         if pkt[ARP].op == 2:
             sip = pkt[ARP].psrc
@@ -88,3 +89,31 @@ ip_mac_map = dict()
 syn_tracker = dict()    # {'ip': {'count': X, 'timestamp': Y}}
 
 sniff(prn=process_packet, store=0)
+
+# header = ['timestamp', 'source_ip', 'destination_ip', 'source_port', 'destination_port', 'protocol', 'length', 'flags', 'rule_based_alert']
+
+# This try...except block will run the sniffer and handle the CSV file
+# try:
+#     with open('network_traffic.csv', 'w', newline='') as csv_file:
+#         csv_writer = csv.writer(csv_file)
+#         csv_writer.writerow(header)
+
+#         print("Sniffer starting... Press Ctrl+C to stop.")
+
+#         # This new lambda calls process_packet, then writes the result
+#         def callback_function(pkt):
+#             # 1. Analyze the packet and get the row
+#             row_to_write = process_packet(pkt)
+            
+#             # 2. Write to CSV only if a row was returned
+#             if row_to_write:
+#                 csv_writer.writerow(row_to_write)
+#                 csv_file.flush()
+
+#         # This is the single, correct sniff call
+#         sniff(prn=callback_function, iface="Ethernet", store=0)
+
+# except KeyboardInterrupt:
+#     print("\nSniffer stopped by user. CSV file saved.")
+# except Exception as e:
+#     print(f"An error occurred: {e}")

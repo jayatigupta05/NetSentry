@@ -26,7 +26,7 @@ def process_packet(pkt):
 
         # TRAFFIC BURST DETECTOR
         pkt_len = len(pkt)
-        # print(f"IP Packet: {src} -> {dst}")
+        print(f"IP Packet: {src} -> {dst}")
         if src in traffic_tracker:
             traffic_tracker[src]["byte_count"] += pkt_len
             curr_time = time.time()
@@ -43,7 +43,7 @@ def process_packet(pkt):
         if pkt.haslayer(TCP):
             sport = pkt[TCP].sport
             dport = pkt[TCP].dport
-            # print(f"TCP/IP Packet: src: {src} | dst: {dst} | sport: {sport} | dport: {dport}")
+            print(f"TCP/IP Packet: src: {src} | dst: {dst} | sport: {sport} | dport: {dport}")
 
             # PORT SCAN DETECTOR
             if src in ip_port_map:
